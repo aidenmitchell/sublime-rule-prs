@@ -18,11 +18,39 @@ headers = {
 }
 
 def get_open_pull_requests():
-    url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/pulls'
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    return response.json()
+    pull_requests = []
+    page = 1
+    per_page = 30  # 100 is the max allowed items per page by GitHub API
+    
+    while True:
+        url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/pulls'
+        params = {'page': page, 'per_page': per_page}
+        print(f"fetching page {page} of Pull Requests")
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        
+        # Extend the list with the pull requests from the current page
+        pull_requests.extend(response.json())
+        
+        # Check if there is a 'Link' header and whether it contains 'rel="next"'
+        if 'Link' in response.headers:
+            links = response.headers['Link'].split(', ')
+            has_next = any('rel="next"' in link for link in links)
+        else:
+            has_next = False
 
+        if not has_next:
+            print(f"fetched page {page} of Pull Requests, no more pages")
+            print(f"Total PRs: {len(pull_requests)}")
+            break  # No more pages, exit loop
+        
+        print(f"fetched page {page} of Pull Requests, moving to {page + 1}")
+        print(f"PRs on page {page}: {len(response.json())}")
+        print(f"PRs found so far: {len(pull_requests)}")
+        page += 1  # Move to the next page
+        
+
+    return pull_requests
 
 def get_files_for_pull_request(pr_number):
     url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/pulls/{pr_number}/files'
