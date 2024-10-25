@@ -37,6 +37,6 @@ detection_methods:
   - "Header analysis"
   - "Sender analysis"
   - "URL analysis"
-id: "2ae83b73-6b38-5c9b-b705-109458016e74"
+id: "a2bf1099-132b-51bf-a36a-f2773788b5e5"
 tags:
   - pr_author_aidenmitchell
