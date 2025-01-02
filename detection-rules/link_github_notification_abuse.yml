@@ -81,6 +81,9 @@ source: |
           // the domain is less than 20 days old
           or network.whois(.href_url.domain).days_old < 20
   )
+tags:
+  - "Attack surface reduction"
+  - pr_author_zoomequipd
 attack_types:
   - "Malware/Ransomware"
 tactics_and_techniques:
@@ -92,5 +95,3 @@ detection_methods:
   - "Content analysis"
   - "URL analysis"
 id: "eabdee5e-1c96-543f-9786-26fda9cbe2d0"
-tags:
-  - pr_author_zoomequipd
