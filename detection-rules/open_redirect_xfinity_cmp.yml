@@ -37,6 +37,6 @@ detection_methods:
   - "Header analysis"
   - "URL analysis"
   - "Sender analysis"
-id: "7b9012fa-0f14-57d5-b729-cb3b84565c47"
+id: "c0805b80-0524-5278-8848-f720d58571c2"
 tags:
   - pr_author_zoomequipd
