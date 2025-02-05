@@ -15,9 +15,20 @@ source: |
                             'better business bureau'
     ) <= 1
   )
-  // and the sender is not in org_domains or from the bbb and passes auth
+  // and the sender is not from the bbb and passes auth
   and not (
-    sender.email.domain.root_domain in ("bbb.org", "mybbb.org", "thefirstbbb.org")
+    (
+      sender.email.domain.root_domain in (
+        "bbb.org", 
+        "mybbb.org", 
+        "bbbcommunity.org", // official BBB site
+        "thefirstbbb.org",
+        "bbbnp.org" // unrelated domain that sends with BBB within the display name
+      )
+     or sender.email.domain.domain in (
+        "bbbwisegivingalliance.ccsend.com" // official BBB comms for events
+     )
+   )
     and headers.auth_summary.dmarc.pass
   )
   
