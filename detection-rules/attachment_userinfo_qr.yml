@@ -37,5 +37,6 @@ detection_methods:
   - "QR code analysis"
   - "File analysis"
   - "Sender analysis"
+id: "9d62cc5c-787c-5f57-93be-0ee96dc73d3e"
 tags:
   - pr_author_aidenmitchell
