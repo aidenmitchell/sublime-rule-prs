@@ -31,5 +31,6 @@ tactics_and_techniques:
 detection_methods:
   - "Sender analysis"
   - "URL analysis"
+id: "d4a65b59-03ec-5179-80ab-371efa821842"
 tags:
   - pr_author_zoomequipd
