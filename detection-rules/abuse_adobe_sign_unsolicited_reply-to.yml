@@ -26,6 +26,9 @@ source: |
   // of a message that has been classified as benign
   and not beta.profile.by_reply_to().any_messages_benign
 
+tags:
+  - "Attack surface reduction"
+  - pr_author_aidenmitchell
 attack_types:
   - "BEC/Fraud"
   - "Callback Phishing"
@@ -37,5 +40,3 @@ detection_methods:
   - "Header analysis"
   - "Sender analysis"
 id: "d00893ba-a65a-5b04-88d1-f35512eae291"
-tags:
-  - pr_author_aidenmitchell
