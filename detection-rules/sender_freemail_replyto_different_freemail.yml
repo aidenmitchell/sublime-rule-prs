@@ -20,6 +20,9 @@ source: |
             and strings.iends_with(sender.email.local_part, .email.domain.domain)
     )
   )
+tags:
+  - "Attack surface reduction"
+  - pr_author_zoomequipd
 attack_types:
   - "BEC/Fraud"
   - "Credential Phishing"
@@ -30,5 +33,3 @@ detection_methods:
   - "Header analysis"
   - "Sender analysis"
 id: "fcd831d0-9e03-5c9a-aa2f-af37d3a8c156"
-tags:
-  - pr_author_zoomequipd
