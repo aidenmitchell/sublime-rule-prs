@@ -39,7 +39,9 @@ source: |
   )
 
   and not profile.by_sender().any_false_positives
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_aidenmitchell
 attack_types:
   - "BEC/Fraud"
 tactics_and_techniques:
@@ -47,9 +49,6 @@ tactics_and_techniques:
   - "Social engineering"
 detection_methods:
   - "Content analysis"
-  - "Content analysis"
   - "Natural Language Understanding"
   - "Sender analysis"
 id: "303081da-6850-5ba6-9589-c3dc7673320e"
-tags:
-  - pr_author_aidenmitchell
