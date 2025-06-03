@@ -42,7 +42,7 @@ source: |
               or .file_type == "msaccess"
             )
             and any(file.explode(.),
-                    any(.scan.yara.matches, . == 'encrypted_msft_office_files')
+                    any(.scan.yara.matches, .name == 'encrypted_msft_office_files')
             )
     )
     // Negating high-trust sender domains unless they fail DMARC authentication
@@ -72,5 +72,6 @@ detection_methods:
   - "File analysis"
   - "YARA"
   - "Sender analysis"
+id: "eb7b26e7-2e74-5b25-8ecf-7fd401969e03"
 tags:
   - pr_author_brycampbell
