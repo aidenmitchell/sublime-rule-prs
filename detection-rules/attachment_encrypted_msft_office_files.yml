@@ -57,7 +57,9 @@ source: |
       )
       or sender.email.domain.root_domain not in $high_trust_sender_root_domains
     )
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_brycampbell
 attack_types:
   - "BEC/Fraud"
   - "Callback Phishing"
@@ -73,5 +75,3 @@ detection_methods:
   - "YARA"
   - "Sender analysis"
 id: "eb7b26e7-2e74-5b25-8ecf-7fd401969e03"
-tags:
-  - pr_author_brycampbell
