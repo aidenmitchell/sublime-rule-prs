@@ -21,9 +21,9 @@ source: |
   and sender.email.domain.root_domain not in~ (
     'dropbox.com',
     'docsend.com',
+    'box.com',
     // tuning: exlude hellosign emails that are covered in another rule
     'hellosign.com'
-    'box.com'
   )
   
   // Contains suspicious links to non-Dropbox/file-sharing domains
@@ -57,5 +57,6 @@ detection_methods:
   - "Natural Language Understanding"
   - "Sender analysis"
   - "URL analysis"
+id: "58a107bc-dd68-5fdd-9813-4a05411aafd9"
 tags:
   - pr_author_IndiaAce
