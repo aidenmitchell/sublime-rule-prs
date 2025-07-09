@@ -3,7 +3,7 @@ description: "Detects when a sender's display name contains Telegram or WhatsApp
 type: "rule"
 severity: "low"
 source: |
-    type.inbound
+  type.inbound
   // Display name contains messaging app names
   and (
     // Telegram variations
@@ -46,3 +46,4 @@ detection_methods:
   - "Content analysis"
   - "Header analysis"
   - "Sender analysis"
+id: "f57e849b-c538-52e0-aeda-b88faf77fedb"
