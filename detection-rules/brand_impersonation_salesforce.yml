@@ -61,5 +61,6 @@ detection_methods:
   - "Content analysis"
   - "Header analysis"
   - "Sender analysis"
+id: "736dfb87-1f99-5cdb-aefc-392257376f3d"
 tags:
   - pr_author_markmsublime
