@@ -1,4 +1,4 @@
-name: "Suspicious content identified by fuzzy attack detection"
+name: "Fuzzy Attack Score: Spam Content Detected"
 description: "Message has been analyzed and flagged as spam by the fuzzy attack detection system, indicating potentially malicious or unwanted content patterns."
 type: "rule"
 severity: "medium"
@@ -15,5 +15,6 @@ tactics_and_techniques:
 detection_methods:
   - "Content analysis"
   - "Threat intelligence"
+id: "e4a029a8-7a96-56fb-8f06-6e059807b785"
 tags:
   - pr_author_markmsublime
