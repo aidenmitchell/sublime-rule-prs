@@ -70,11 +70,23 @@ source: |
                   ),
                   // Run link analysis on the filtered URLs to detect phishing
                   ml.link_analysis(.).credphish.disposition == "phishing"
+                  // confidence is only returned when brands, if it's not there, consider this true
+                  // this ensures if there is a brand, the confidence is high
+                  // and allows matching when there is no confidence
+                  and coalesce(ml.link_analysis(.).credphish.confidence == "high", true)
+                  and not (
+                    ml.link_analysis(.).credphish.brand.name is not null
+                    and ml.link_analysis(.).credphish.brand.name == "GoDaddy"
+                    and strings.icontains(ml.link_analysis(.).final_dom.inner_text,
+                                          'is parked free, courtesy of GoDaddy.com.'
+                    )
+                    and strings.icontains(ml.link_analysis(.).final_dom.inner_text,
+                                          'Get This Domain'
+                    )
+                  )
               )
           )
   )
-  
-
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
