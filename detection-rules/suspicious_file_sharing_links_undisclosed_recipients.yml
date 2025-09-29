@@ -1,4 +1,4 @@
-name: "Suspicious file sharing links with undisclosed recipients"
+name: "Credential Phishing: Suspicious hyper-linked image with file sharing links to undisclosed recipients"
 description: "Detects messages with suspicious file sharing language in links or images that are sent to undisclosed recipients or self-addressed emails. The rule identifies display text containing terms like 'view document', 'download files', or 'show attached' in links, or when links lack display text but the message screenshot contains similar suspicious file sharing language through OCR analysis."
 type: "rule"
 severity: "medium"
@@ -10,12 +10,14 @@ source: |
     or (
       length(recipients.to) > 0
       and (
-        all(recipients.to, strings.ilike(.display_name, "undisclosed?recipients"))
-        or all(recipients.to,
-               .email.email == sender.email.email
-               and not sender.email.domain.root_domain in $org_domains
-               and not sender.email.domain.root_domain in $high_trust_sender_root_domains
-               and headers.auth_summary.dmarc.pass
+        all(recipients.to,
+            strings.ilike(.display_name, "undisclosed?recipients")
+            or (
+              .email.email == sender.email.email
+              and not sender.email.domain.root_domain in $org_domains
+              and not sender.email.domain.root_domain in $high_trust_sender_root_domains
+              and headers.auth_summary.dmarc.pass
+            )
         )
       )
     )
@@ -42,7 +44,6 @@ source: |
 
 attack_types:
   - "Credential Phishing"
-  - "Malware/Ransomware"
 tactics_and_techniques:
   - "Evasion"
   - "Social engineering"
