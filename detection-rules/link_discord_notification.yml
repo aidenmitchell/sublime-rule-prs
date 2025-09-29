@@ -12,31 +12,25 @@ source: |
     or any(attachments,
            .file_type in $file_types_images
            and any(ml.logo_detect(.).brands,
-                   strings.starts_with(.name, "Discord")
+                   .name == "Discord" and .confidence != "low"
            )
     )
     // Discord logo detection in message screenshot
     or any(ml.logo_detect(file.message_screenshot()).brands,
-           strings.starts_with(.name, "Discord") and .confidence != "low"
+           .name == "Discord" and .confidence != "low"
     )
   )
   and (
-    regex.icontains(subject.subject, 'you have received a new notification')
+    strings.icontains(subject.subject, 'you have received a new notification')
     or regex.icontains(subject.subject,
-                       'new (?:message|notification|alert|activity)'
+                       '(?:new|unread|missed|pending|discord)\s+(?:message|notification|alert|activity|call)'
+                       '(?:message|notification|alert|activity|call) (?:from|waiting|pending)',
+                       
     )
-    or regex.icontains(subject.subject,
-                       '(?:message|notification|alert|activity) (?:from|waiting|pending)'
-    )
-    or regex.icontains(subject.subject, 'unread (?:message|notification)s?')
-    or regex.icontains(subject.subject,
-                       '(?:missed|pending) (?:message|notification|call)s?'
-    )
-    or regex.icontains(subject.subject, 'friend request')
-    or regex.icontains(subject.subject, 'server invitation')
-    or regex.icontains(subject.subject, 'mentioned you')
-    or regex.icontains(subject.subject, 'direct message')
-    or regex.icontains(subject.subject, 'discord (?:notification|alert|message)')
+    or strings.icontains(subject.subject, 'friend request')
+    or strings.icontains(subject.subject, 'server invitation')
+    or strings.icontains(subject.subject, 'mentioned you')
+    or strings.icontains(subject.subject, 'direct message')
   )
   and not (
     sender.email.domain.root_domain == "discord.com"
