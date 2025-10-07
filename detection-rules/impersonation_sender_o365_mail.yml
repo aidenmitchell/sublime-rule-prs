@@ -15,5 +15,6 @@ tactics_and_techniques:
   - "Social engineering"
 detection_methods:
   - "Sender analysis"
+id: "51af3d4a-1667-50df-a99e-e3f00479564b"
 tags:
   - pr_author_zoomequipd
