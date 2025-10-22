@@ -6,7 +6,7 @@ type: "rule"
 severity: "low"
 source: |
   type.inbound
-  and any(attachments, .file_extension in~ ('sap'))
+  and any(attachments, .file_extension == "sap")
   and (
     not profile.by_sender().solicited
     or profile.by_sender().any_messages_malicious_or_spam
@@ -33,3 +33,4 @@ detection_methods:
   - "File analysis"
   - "Header analysis"
   - "Sender analysis"
+id: "220ed3de-1b01-54a4-898d-6081785e2870"
