@@ -1,0 +1,19 @@
+name: "Service abuse: Facebook business with action required subject"
+description: "Detects messages from the Facebook business domain containing 'action required' in the subject line, commonly used to create urgency in impersonation attacks."
+type: "rule"
+severity: "medium"
+source: |
+  strings.icontains(subject.subject, "action required")
+  and sender.email.email == "noreply@business.facebook.com"
+tags:
+  - "Attack surface reduction"
+  - pr_author_IndiaAce
+attack_types:
+  - "Credential Phishing"
+tactics_and_techniques:
+  - "Impersonation: Brand"
+  - "Social engineering"
+detection_methods:
+  - "Content analysis"
+  - "Sender analysis"
+id: "64297d2f-a5bd-5336-8db7-ec00df59411f"
