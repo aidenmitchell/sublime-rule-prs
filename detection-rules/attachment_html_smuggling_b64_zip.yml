@@ -4,7 +4,7 @@ type: "rule"
 severity: "medium"
 source: |
   type.inbound
-  any(attachments,
+  and any(attachments,
       (
         .file_extension in~ ("html", "htm", "shtml", "dhtml")
         or .file_type == "html"
@@ -34,3 +34,4 @@ detection_methods:
   - "File analysis"
   - "HTML analysis"
   - "Javascript analysis"
+id: "47e388de-08f8-5261-8571-99dbf73a352d"
