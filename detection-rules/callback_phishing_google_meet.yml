@@ -52,5 +52,6 @@ tactics_and_techniques:
   - "Out of band pivot"
 detection_methods:
   - "Content analysis"
+id: "70e01845-b815-5be5-87ac-11ae7477367e"
 tags:
   - pr_author_peterdj45
