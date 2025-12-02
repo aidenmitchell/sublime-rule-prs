@@ -6,7 +6,7 @@ source: |
   type.inbound
   and any(body.links,
       regex.icontains(.href_url.url, '\[::ffff:[0-9a-f]{4}:[0-9a-f]{4}\]')
-    )
+  )
 tags:
   - "Attack surface reduction"
   - pr_author_MSAdministrator
@@ -18,3 +18,4 @@ tactics_and_techniques:
 detection_methods:
   - "Content analysis"
   - "URL analysis"
+id: "caacf30c-fd89-5869-a945-c660ff9bda40"
