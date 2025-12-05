@@ -7,9 +7,9 @@ source: |
   and (
     strings.ilike(strings.replace_confusables(sender.display_name), "Carta")
     or strings.ilike(sender.display_name, "*via Carta*")
-    // or  any(ml.logo_detect(file.message_screenshot()).brands,
-    //           .name == "Carta"
-    // )
+    or  any(ml.logo_detect(file.message_screenshot()).brands,
+              .name == "Carta"
+    )
     or (
       (
         any([subject.subject, sender.display_name],
@@ -32,7 +32,7 @@ source: |
         or strings.icontains(body.current_thread.text, "Visit our Knowledge Base")
         or strings.icontains(body.current_thread.text, "eShares")
         or any(file.explode(file.message_screenshot()),
-               strings.icontains(.scan.ocr.raw, "carta")
+               regex.icontains(.scan.ocr.raw, '\bcarta\b')
                // terms present in Carta email footers
                or strings.icontains(.scan.ocr.raw, "Equity Education Center")
                or strings.icontains(.scan.ocr.raw, "Visit our Knowledge Base")
@@ -45,7 +45,8 @@ source: |
     (
       sender.email.domain.root_domain in~ (
         "carta.com",
-        "connectedcommunity.org" // Carta Community Forum
+        "connectedcommunity.org", // Carta Community Forum
+        "sendoso.com" // Gifting fulfillment service
       )
       and headers.auth_summary.dmarc.pass
     )
