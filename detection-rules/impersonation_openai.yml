@@ -9,7 +9,7 @@ source: |
     strings.icontains(sender.display_name, "openai")
     or strings.icontains(sender.display_name, "chatgpt")
     or any(ml.logo_detect(file.message_screenshot()).brands,
-           .name == "OpenAI" and .confidence in ("low")
+           .name == "OpenAI" and .confidence not in ("low")
     )
     // OpenAI copyright footer
     or (
@@ -24,12 +24,12 @@ source: |
     )
     // Typosquatting domains in links
     or any(body.links,
-           strings.ilevenshtein(.display_url.domain.root_domain, "openai.com") <= 2
-           and .display_url.domain.root_domain != "openai.com"
+           0 < strings.ilevenshtein(.display_url.domain.root_domain, "openai.com") < 3
+           and .href_url.domain.root_domain != "openai.com"
     )
     or any(body.links,
-           strings.ilevenshtein(.display_url.domain.root_domain, "chatgpt.com") <= 2
-           and .display_url.domain.root_domain != "chatgpt.com"
+           0 < strings.ilevenshtein(.display_url.domain.root_domain, "chatgpt.com") < 3
+           and .href_url.domain.root_domain != "chatgpt.com"
     )
   )
   // Sender reputation checks
