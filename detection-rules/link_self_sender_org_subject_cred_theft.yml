@@ -47,6 +47,9 @@ source: |
       )
     )
   )
+tags:
+  - "Attack surface reduction"
+  - pr_author_zoomequipd
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -59,5 +62,3 @@ detection_methods:
   - "URL analysis"
   - "Header analysis"
 id: "bfa9aa08-ed3b-5e4a-a83c-192efd126530"
-tags:
-  - pr_author_zoomequipd
