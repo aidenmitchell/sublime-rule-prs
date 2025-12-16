@@ -39,9 +39,6 @@ source: |
           // abuse observed
           or .href_url.domain.root_domain == "share.google"
   )
-tags:
-  - "Attack surface reduction"
-  - pr_author_aidenmitchell
 attack_types:
   - "Credential Phishing"
   - "Malware/Ransomware"
@@ -55,3 +52,5 @@ detection_methods:
   - "Sender analysis"
   - "URL analysis"
 id: "473d3247-8f99-5130-b091-ed95a6fff5ba"
+tags:
+  - pr_author_aidenmitchell
