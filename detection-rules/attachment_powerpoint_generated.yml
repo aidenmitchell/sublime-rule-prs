@@ -22,5 +22,6 @@ detection_methods:
   - "Archive analysis"
   - "File analysis"
   - "Content analysis"
+id: "7bb3fb81-26a0-56e7-9eeb-880d41c12541"
 tags:
   - pr_author_MSAdministrator
