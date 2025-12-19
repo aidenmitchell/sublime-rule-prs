@@ -15,6 +15,9 @@ attack_types:
   - "Callback Phishing"
   - "Credential Phishing"
   - "Malware/Ransomware"
+tags:
+  - "Attack surface reduction"
+  - pr_author_JFarina5
 tactics_and_techniques:
   - "PDF"
   - "Evasion"
@@ -22,5 +25,3 @@ detection_methods:
   - "File analysis"
   - "Exif analysis"
 id: "64e6c8a8-b75b-5c43-acb8-765ce05dca36"
-tags:
-  - pr_author_JFarina5
