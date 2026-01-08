@@ -29,7 +29,9 @@ source: |
     )
     and coalesce(headers.auth_summary.dmarc.pass, false)
   )
-
+tags:
+  - pr_author_JFarina5
+- "Attack surface reduction"
 attack_types:
   - "Credential Phishing"
   - "Malware/Ransomware"
@@ -40,5 +42,3 @@ detection_methods:
   - "File analysis"
   - "Exif analysis"
 id: "eda99b1d-5639-57a0-860e-2d55b7f3b84f"
-tags:
-  - pr_author_JFarina5
