@@ -3,8 +3,8 @@ description: "Detects messages impersonating OpenAI through display name spoofin
 type: "rule"
 severity: "medium"
 source: |
-   type.inbound
-  and (
+    type.inbound
+    and (
     // Brand impersonation indicators
     strings.icontains(sender.display_name, "openai")
     or strings.icontains(sender.display_name, "chatgpt")
