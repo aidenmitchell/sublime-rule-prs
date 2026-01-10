@@ -34,8 +34,9 @@ source: |
           )
     )
   )
-tag:
+tags:
   - "Attack surface reduction"
+  - pr_author_MSAdministrator
 attack_types:
   - "Credential Phishing"
   - "Malware/Ransomware"
@@ -48,5 +49,3 @@ detection_methods:
   - "Archive analysis"
   - "File analysis"
 id: "b88e53a7-9947-5c6b-bea9-d67906634655"
-tags:
-  - pr_author_MSAdministrator
