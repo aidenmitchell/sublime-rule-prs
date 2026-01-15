@@ -43,5 +43,6 @@ detection_methods:
   - "Content analysis"
   - "Sender analysis"
   - "URL analysis"
+id: "d63d51b1-875b-5fbb-afdf-5af8e0523b73"
 tags:
   - pr_author_brycampbell
