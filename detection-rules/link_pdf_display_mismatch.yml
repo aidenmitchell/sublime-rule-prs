@@ -58,7 +58,6 @@ detection_methods:
   - "Content analysis"
   - "Sender analysis"
   - "URL analysis"
-  - "Whois"
 id: "901c1dd0-d557-57cf-b520-a287ad6e8be7"
 tags:
   - pr_author_MSAdministrator
