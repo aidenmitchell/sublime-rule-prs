@@ -1,7 +1,7 @@
 name: "Brand impersonation: Marriott with gift language"
 description: "Detects messages impersonating Marriott brand that contain gift-related language such as 'appreciation gift', 'thank you gift', or 'something special' from senders not associated with legitimate Marriott domains."
 type: "rule"
-severity: ""
+severity: "medium"
 source: |
   type.inbound
   and (
@@ -39,5 +39,6 @@ detection_methods:
   - "Content analysis"
   - "Header analysis"
   - "Sender analysis"
+id: "39b32b97-80bc-5033-902e-312377cab6e2"
 tags:
   - pr_author_markmsublime
