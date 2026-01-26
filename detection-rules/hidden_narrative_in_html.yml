@@ -36,9 +36,6 @@ source: |
                                   '\b(smallScreen|mobileVersion|mobile-version|small-screen|mobileOnly|mobile-only)\b'
           )
   )
-tags:
-  - "Attack surface reduction"
-  - pr_author_IndiaAce
 attack_types:
   - "Credential Phishing"
   - "Malware/Ransomware"
@@ -50,3 +47,5 @@ detection_methods:
   - "Content analysis"
   - "HTML analysis"
 id: "a2a4cb33-0a79-5e8b-a5ba-07b52ceb3b42"
+tags:
+  - pr_author_IndiaAce
