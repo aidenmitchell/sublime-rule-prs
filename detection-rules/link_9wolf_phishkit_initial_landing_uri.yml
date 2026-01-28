@@ -1,5 +1,5 @@
 name: "Link: 9WOLF phishkit initial landing URI"
-description: "Detects links containing the '?ai=xd' query parameter associated with 9wolf malware service initial landing pages."
+description: "Detects links containing the '?ai=xd' query parameter associated with 9wolf phishing service initial landing pages."
 type: "rule"
 severity: "high"
 source: |
@@ -14,5 +14,6 @@ tactics_and_techniques:
 detection_methods:
   - "URL analysis"
   - "Threat intelligence"
+id: "a165e206-61b3-5b08-9408-2fe3c2bf0810"
 tags:
   - pr_author_hadojae
