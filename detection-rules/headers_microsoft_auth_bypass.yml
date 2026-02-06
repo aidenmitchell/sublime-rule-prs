@@ -36,7 +36,9 @@ source: |
               )
           )
   )
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_MSAdministrator
 attack_types:
   - "BEC/Fraud"
   - "Credential Phishing"
@@ -47,5 +49,3 @@ tactics_and_techniques:
 detection_methods:
   - "Header analysis"
 id: "c1d38e49-d801-5ebe-9288-708bc400acab"
-tags:
-  - pr_author_MSAdministrator
