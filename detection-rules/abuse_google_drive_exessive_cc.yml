@@ -34,7 +34,10 @@ source: |
   and any(ml.nlu_classifier(body.current_thread.text).intents,
           .name == "cred_theft" and .confidence != "low"
   )
-
+  
+tags:
+  - "Attack surface reduction"
+  - pr_author_IndiaAce
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -46,5 +49,3 @@ detection_methods:
   - "Natural Language Understanding"
   - "Sender analysis"
 id: "19dc6f1c-4c46-5dc5-b2ee-a594e768d79b"
-tags:
-  - pr_author_IndiaAce
