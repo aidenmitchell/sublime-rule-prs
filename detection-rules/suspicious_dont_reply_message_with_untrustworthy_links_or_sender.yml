@@ -1,4 +1,4 @@
-name: "Suspicious 'don't reply' message with untrustworthy links or sender"
+name: "Suspicious dont reply message with untrustworthy links or sender"
 description: "Detects messages containing 'don't reply' instructions with links to suspicious domains (free file hosts, new domains, or free subdomain hosts) or from free email providers, excluding legitimate services and unsolicited from unknown senders."
 type: "rule"
 severity: "low"
@@ -51,5 +51,6 @@ detection_methods:
   - "Sender analysis"
   - "URL analysis"
   - "Whois"
+id: "6a5ba8b1-c24d-5091-8c83-7691c86cc85a"
 tags:
   - pr_author_hadojae
