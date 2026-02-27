@@ -1,7 +1,7 @@
 name: "Attachment: REG file"
 description: "Detects messages containing Windows Registry (.reg) files either as direct attachments or within compressed archives. Registry files can be used to modify system settings and potentially compromise system security."
 type: "rule"
-severity: "high"
+severity: "low"
 source: |
     type.inbound
     and length(attachments) > 0
@@ -13,6 +13,9 @@ source: |
             )
     )
 
+tags:
+  - "Attack surface reduction"
+  - pr_author_peterdj45
 attack_types:
   - "Malware/Ransomware"
 tactics_and_techniques:
@@ -21,5 +24,3 @@ detection_methods:
   - "Archive analysis"
   - "File analysis"
 id: "65a7b46d-7159-5c54-b7f4-36f739e69e52"
-tags:
-  - pr_author_peterdj45
