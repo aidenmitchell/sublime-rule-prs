@@ -16,7 +16,9 @@ source: |
   // new sender
   and profile.by_sender_email().prevalence == "new"
   
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_zoomequipd
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -26,5 +28,3 @@ detection_methods:
   - "Sender analysis"
   - "URL analysis"
 id: "0cad40e2-dfe8-5d95-b611-b963a0918f61"
-tags:
-  - pr_author_zoomequipd
