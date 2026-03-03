@@ -6,7 +6,9 @@ source: |
   type.inbound
   and any(body.links, strings.contains(.display_url.url, ':8443') 
   
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_cybher0808
 attack_types:
   - "Credential Phishing"
   - "Malware/Ransomware"
@@ -14,5 +16,3 @@ tactics_and_techniques:
   - "Evasion"
 detection_methods:
   - "URL analysis"
-tags:
-  - pr_author_cybher0808
