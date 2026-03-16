@@ -40,6 +40,11 @@ source: |
                       and .confidence == "high"
           )
   )
+  // Negate bulk/marketing emails with unsubscribe links
+  and not any(body.links,
+              strings.icontains(.display_text, "unsubscribe")
+              or strings.icontains(.href_url.url, "unsubscribe")
+  )
 id: "f4968f36-6e1b-5e38-82cb-6f02c8ca3627"
 tags:
   - pr_author_zoomequipd
