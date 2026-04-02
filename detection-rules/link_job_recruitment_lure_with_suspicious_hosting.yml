@@ -12,8 +12,14 @@ source: |
     'xero.com',
     'workforce.com',
     'eventbrite.com',
-    'tiscali.it'
+    'tiscali.it',
+    'on24event.com',
+    'talexio.com',
+    'easy.jobs',
+    'suitzzedash.com',
+    'awsapps.com'
   )
+  and regex.icontains(sender.display_name, 'careers|jobs')
   and (
     any(body.links,
         (
