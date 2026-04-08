@@ -1,5 +1,14 @@
 name: "Callback phishing via Apple ID display name abuse"
-description: "Detects callback phishing that abuses legitimate Apple ID notification emails as a delivery mechanism. The threat actor sets their Apple ID display name to a callback scam lure (e.g., a fake charge with a phone number), which Apple then embeds in the "Dear [name]" greeting of a routine account change notification. This legitimate email is forwarded to multiple targets via a distribution list, bypassing sender reputation checks since it originates from Apple's real infrastructure. The rule extracts the name field from the greeting and applies NLU classification to detect callback scam language within it."
+description: >-
+  Detects callback phishing that abuses legitimate Apple ID notification
+  emails as a delivery mechanism. The threat actor sets their Apple ID
+  display name to a callback scam lure (e.g., a fake charge with a phone
+  number), which Apple then embeds in the "Dear [name]" greeting of a
+  routine account change notification. This legitimate email is forwarded
+  to multiple targets via a distribution list, bypassing sender reputation
+  checks since it originates from Apple's real infrastructure. The rule
+  extracts the name field from the greeting and applies NLU classification
+  to detect callback scam language within it.
 type: "rule"
 severity: "high"
 source: |
@@ -12,21 +21,16 @@ source: |
     any(html.xpath(body.html, '//div[@class="email-body"]').nodes,
         any(regex.iextract(.display_text, '^(?P<first_line>[^\n]+)\n'),
             // NLU catches the actor controlled values as callback
-            //
-            // This rule makes use of a beta feature and is subject to change without notice
-            // using the beta feature in custom rules is not suggested until it has been formally released
-            //
-            any(ml.nlu_classifier(beta.ml_translate(.named_groups["first_line"]).text).intents,
+            any(ml.nlu_classifier(beta.ml_translate(.named_groups["first_line"]).text
+                ).intents,
                 .name == "callback_scam"
             )
             // we have to account for NLU not catching it as callback_scam
             // this catches more than one digit followed by all capital letters
             // 599 USD, we use the unicode category Lu for capital letters from a bunch of languges
-            //
-            // This rule makes use of a beta feature and is subject to change without notice
-            // using the beta feature in custom rules is not suggested until it has been formally released
-            //
-            or regex.contains(beta.ml_translate(.named_groups["first_line"]).text, '\d{2,} \p{Lu}{2,5} ')
+            or regex.contains(beta.ml_translate(.named_groups["first_line"]).text,
+                              '\d{2,} \p{Lu}{2,5} '
+            )
             // commonly obseved phrase "if not you call"
             or strings.icontains(.named_groups["first_line"], "If not you call")
             // first line ends in a phone number
@@ -56,8 +60,7 @@ source: |
       )
     )
   )
-  and not any(recipients.to, .email.domain.domain in $org_domains)
-
+  and not recipients.to[0].email.domain.domain in $org_domains
 attack_types:
   - "Callback Phishing"
 tactics_and_techniques:
@@ -68,5 +71,6 @@ detection_methods:
   - "Content analysis"
   - "Natural Language Understanding"
   - "Sender analysis"
+id: "a8607ce1-8614-505a-99c2-c8c716e80bc6"
 tags:
   - pr_author_zoomequipd
