@@ -1,0 +1,13 @@
+name: "Test - Internal fuzzy attack score graymail"
+description: |
+  Test rule that runs internal.fuzzy_attack_score_test on inbound messages
+  and flags when the response sets graymail to true.
+type: "rule"
+severity: "informational"
+source: |
+  type.inbound
+  and internal.fuzzy_attack_score_test().graymail
+tags:
+  - "test"
+  - pr_author_dlynch-sublime
+id: "27ec41f8-ef3f-5d43-ad68-21ec38e9cf56"
