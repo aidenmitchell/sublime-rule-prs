@@ -6,7 +6,9 @@ type: "rule"
 severity: "informational"
 source: |
   type.inbound
-  and internal.fuzzy_attack_score_test().graymail
+  and any([internal.fuzzy_attack_score_test()],
+          .analyzed and .verdict == "never_match_this_verdict"
+  )
 tags:
   - "test"
   - pr_author_dlynch-sublime
