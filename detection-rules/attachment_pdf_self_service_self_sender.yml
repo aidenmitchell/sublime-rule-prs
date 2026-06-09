@@ -39,7 +39,9 @@ source: |
               )
           )
   )
-  
+tags:
+  - "Attack surface reduction"
+  - pr_author_zoomequipd
 attack_types:
   - "BEC/Fraud"
   - "Credential Phishing"
@@ -53,5 +55,3 @@ detection_methods:
   - "URL analysis"
   - "Sender analysis"
 id: "9b97f4cf-ab96-5f92-a1ca-90967b94bcb1"
-tags:
-  - pr_author_zoomequipd
