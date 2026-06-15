@@ -11,7 +11,9 @@ source: |
             .name == 'cred_theft' and .confidence != 'low'
     )
 
-
+tags:
+  - "Attack surface reduction"
+  - pr_author_cybher0808
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -23,5 +25,3 @@ detection_methods:
   - "HTML analysis"
   - "Natural Language Understanding"
 id: "c262f5ba-56e2-5715-978c-81abfd197126"
-tags:
-  - pr_author_cybher0808
