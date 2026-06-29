@@ -7,12 +7,9 @@ source: |
   and any(body.links,
           .href_url.scheme == "mailto"
           and regex.icontains(.href_url.url,
-                              '{\s*(?:domain|email|RECIPIENT_EMAIL)\s*}'
+                              '{\s*(?:domain|email|(?:RECIPIENT|SENDER)[_\s]EMAIL)\s*}'
           )
   )
-tags:
-  - "Attack surface reduction"
-  - pr_author_zoomequipd
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -22,3 +19,5 @@ detection_methods:
   - "URL analysis"
   - "Content analysis"
 id: "b27e9e2a-a979-584f-9da7-a2936829ae0c"
+tags:
+  - pr_author_zoomequipd
