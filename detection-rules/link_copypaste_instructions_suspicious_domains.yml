@@ -1,6 +1,5 @@
 name: "Link: Suspicious domain with copy-paste instructions"
 description: "Detects messages instructing recipients to manually copy and paste a URL containing free subdomain hosting domains (pages.dev or web.app) into their browser, while no actual clickable links to those domains are present in the message body. This tactic is used to evade URL scanning by preventing automated link analysis. Supports detection in non-English messages via translation."
-type: "rule"
 severity: "high"
 source: |
   type.inbound
@@ -26,7 +25,6 @@ source: |
   and not any(body.links,
               .href_url.domain.root_domain in~ ("web.app", "pages.dev")
   )
-
 attack_types:
   - "Credential Phishing"
 tactics_and_techniques:
@@ -37,6 +35,6 @@ detection_methods:
   - "Content analysis"
   - "Header analysis"
   - "Sender analysis"
-id: "6dd983b9-7a90-5dbe-b324-a5ed4bfb1f24"
+id: "f51a5025-71f6-5626-a292-3e75dda0a1e7"
 tags:
   - pr_author_peterdj45
