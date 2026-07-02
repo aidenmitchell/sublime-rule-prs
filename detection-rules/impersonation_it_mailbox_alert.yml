@@ -1,4 +1,4 @@
-name: "Impersonation: IT Department Mailbox Storage Alert"
+name: "Impersonation: IT Department mailbox storage alert"
 description: "Detects inbound messages impersonating an internal IT Department by presenting a fake mailbox storage alert."
 type: "rule"
 severity: "medium"
@@ -12,7 +12,7 @@ source: |
             'Clean Mailbox Now',
             'Contact IT Support'
           ],
-          . in map(body.links, .display_text)
+          . in map(html.xpath(body.html, '//a').nodes, .display_text)
   )
   and any(body.previous_threads,
           strings.contains(.text, 'IT Department')
