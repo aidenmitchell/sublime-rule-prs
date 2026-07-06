@@ -68,6 +68,9 @@ source: |
     )
   )
 
+tags:
+  - "Attack surface reduction"
+  - pr_author_missingn0pe
 attack_types:
   - "BEC/Fraud"
   - "Credential Phishing"
@@ -80,5 +83,3 @@ detection_methods:
   - "Header analysis"
   - "Sender analysis"
 id: "027cb65d-aee3-5f10-9555-20b719bbde42"
-tags:
-  - pr_author_missingn0pe
