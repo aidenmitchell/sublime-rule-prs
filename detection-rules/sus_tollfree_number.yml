@@ -7,6 +7,9 @@ source: |
   and any([body.current_thread.text, subject.subject],
           regex.icontains(., '\b\+?(\d{1}.)?\(?8\d{2}?\)?.555.?0[12]99\b')
   )
+tags:
+  - "Attack surface reduction"
+  - pr_author_peterdj45
 attack_types:
   - "Spam"
 tactics_and_techniques:
@@ -14,5 +17,3 @@ tactics_and_techniques:
 detection_methods:
   - "Content analysis"
 id: "d9766109-6574-5fd8-9c07-d606d3ce82d2"
-tags:
-  - pr_author_peterdj45
