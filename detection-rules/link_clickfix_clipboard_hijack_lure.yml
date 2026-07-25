@@ -15,52 +15,40 @@ source: |
   // message contains links
   and 0 < length(body.links) < 15
   
-  // NLU detects credential theft or malware delivery intent
-  and (
-    any(ml.nlu_classifier(body.current_thread.text).intents,
-        .name in ("cred_theft") and .confidence in ("medium", "high")
-    )
-    or any(ml.nlu_classifier(body.current_thread.text).entities,
-           .name == "urgency"
-    )
+  // NLU detects credential theft intent
+  and any(ml.nlu_classifier(body.current_thread.text).intents,
+          .name in ("cred_theft") and .confidence in ("medium", "high")
   )
   
-  // require 2 of the following ClickFix-specific signals
-  and 2 of (
+  // REQUIRED: email must contain explicit copy-paste-to-terminal instruction
+  // this is the core ClickFix signal — the attacker has to tell the victim what to do
+  and strings.icontains(body.current_thread.text, "copy")
+  and (
+    strings.icontains(body.current_thread.text, "paste")
+    or strings.icontains(body.current_thread.text, "pasting")
+  )
+  and strings.icontains(body.current_thread.text,
+                        "terminal",
+                        "powershell",
+                        "command prompt",
+                        "run dialog",
+                        "win+r",
+                        "windows+r",
+                        "cmd"
+  )
   
-    // explicit copy-paste-to-terminal instruction
-    (
-      strings.icontains(body.current_thread.text, "copy")
-      and (
-        strings.icontains(body.current_thread.text, "paste")
-        or strings.icontains(body.current_thread.text, "pasting")
-      )
-      and any([
-                strings.icontains(body.current_thread.text, "terminal"),
-                strings.icontains(body.current_thread.text, "powershell"),
-                strings.icontains(body.current_thread.text, "command prompt"),
-                strings.icontains(body.current_thread.text, "run dialog"),
-                strings.icontains(body.current_thread.text, "win+r"),
-                strings.icontains(body.current_thread.text, "windows+r"),
-                strings.icontains(body.current_thread.text, "cmd")
-              ],
-              .
-      )
-    ),
+  // require 1 additional supporting signal
+  and 1 of (
   
     // fake CAPTCHA or browser verification framing
-    (
-      any([
-            strings.icontains(body.current_thread.text, "captcha"),
-            strings.icontains(body.current_thread.text, "verify you are human"),
-            strings.icontains(body.current_thread.text, "human verification"),
-            strings.icontains(body.current_thread.text, "browser check"),
-            strings.icontains(body.current_thread.text, "press windows"),
-            strings.icontains(body.current_thread.text, "press win+r"),
-            strings.icontains(body.current_thread.text, "i am not a robot")
-          ],
-          .
-      )
+    strings.icontains(body.current_thread.text,
+                      "captcha",
+                      "verify you are human",
+                      "human verification",
+                      "browser check",
+                      "press windows",
+                      "press win+r",
+                      "i am not a robot"
     ),
   
     // link resolves to or redirects through a suspicious TLD
@@ -71,16 +59,8 @@ source: |
         )
     ),
   
-    // freemail sender — should never send CAPTCHA or terminal instructions
+    // freemail sender — should never send terminal instructions
     sender.email.domain.domain in $free_email_providers
-  )
-  
-  // negate known security awareness training platforms
-  and sender.email.domain.root_domain not in (
-    "knowbe4.com",
-    "proofpoint.com",
-    "cofense.com",
-    "terranovasecurity.com"
   )
   
   // negate highly trusted sender domains unless they fail DMARC
@@ -107,5 +87,4 @@ references:
   - "https://www.elastic.co/security-labs/telepuz-maas-malware-clickfix"
   - "https://www.microsoft.com/en-us/security/blog/2026/04/30/email-threat-landscape-q1-2026-trends-and-insights/"
   - "https://yanaivanov.com/writing/clickfix_field_note.html"
-id: ""
 id: "df51b2bb-8f40-51b0-ae6f-ed742cf00109"
