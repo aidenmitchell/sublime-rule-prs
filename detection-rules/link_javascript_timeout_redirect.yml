@@ -1,5 +1,5 @@
-name: "Link: JavaScript redirect with hash-based obfuscation"
-description: "Detects inbound messages sent to self, invalid recipients, or undisclosed recipients containing links that, upon analysis, include a JavaScript setTimeout redirect using location.hash to obscure the final destination. This technique delays redirection and appends URL fragments to evade static link inspection."
+name: "Link: Suspicious recipient with timeout redirect"
+description: "Detects inbound messages sent to self, invalid recipients, or undisclosed recipients containing links that, upon analysis, include a JavaScript setTimeout redirect. This technique delays redirection and appends URL fragments to evade static link inspection."
 type: "rule"
 severity: "medium"
 source: |
@@ -24,7 +24,7 @@ source: |
       and length(recipients.bcc) == 0
     )
   )
-  and 0 < length(body.links) < 10
+  and 0 < length(body.current_thread.links) < 10
   and any(body.current_thread.links,
           any(html.xpath(ml.link_analysis(., mode="aggressive").final_dom,
                          "//script"

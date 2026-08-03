@@ -32,9 +32,9 @@ source: |
       length(headers.reply_to) > 0
       and (
         // domain has communicated with recipient
-        any(headers.reply_to, .email.domain.root_domain in $sender_domains)
+        any(headers.reply_to, .email.domain.domain in $sender_domains)
         // solicited sender
-        and any(headers.reply_to, .email.domain.root_domain in $recipient_domains)
+        and any(headers.reply_to, .email.domain.domain in $recipient_domains)
       )
     )
     // negate high trust sender root domains
@@ -43,12 +43,6 @@ source: |
     )
   )
   
-  // negate microsoft's domain
-  and not (
-    sender.email.domain.domain == "microsoft.onmicrosoft.com"
-    and headers.auth_summary.spf.pass
-    and all(body.links, .href_url.domain.root_domain == "microsoft.com")
-  )
 tags:
   - "Attack surface reduction"
   - pr_author_missingn0pe
