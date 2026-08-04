@@ -1,4 +1,4 @@
-name: "Service abuse: Jira notification with suspicious link"
+name: "Link: Jira notification from new sender subdomain with suspicious link"
 description: "Detects legitimate, DMARC-authenticated Jira notification emails from Atlassian that contain suspicious links pointing to domains outside the Tranco 1M list, including via URL rewrite parameters. Flags messages from senders with no prior relationship that are not part of an existing thread."
 type: "rule"
 severity: "medium"
@@ -63,22 +63,20 @@ source: |
     (length(headers.references) > 0 or headers.in_reply_to is not null)
     and (
       (
-        (
-          (subject.is_forward or subject.is_reply)
-          // ticket number present
-          or regex.icontains(subject.subject,
-                             '\(?[a-z]{1,8}-\d{1,8}\)?',
-                             'ticket #\d{1,8}'
-          )
+        (subject.is_forward or subject.is_reply)
+        // ticket number present
+        or regex.icontains(subject.subject,
+                           '\(?[a-z]{1,8}-\d{1,8}\)?',
+                           'ticket #\d{1,8}'
         )
-        and (
-          // previous thread exists
-          length(body.previous_threads) >= 1
-          // most service accounts typically do not contain a previous thread
-          or (
-            strings.icontains(body.current_thread.text, "—-—-—-—")
-            or strings.icontains(body.plain.raw, "—-—-—-—")
-          )
+      )
+      and (
+        // previous thread exists
+        length(body.previous_threads) >= 1
+        // most service accounts typically do not contain a previous thread
+        or (
+          strings.icontains(body.current_thread.text, "—-—-—-—")
+          or strings.icontains(body.plain.raw, "—-—-—-—")
         )
       )
     )
