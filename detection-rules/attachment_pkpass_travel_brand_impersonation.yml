@@ -41,30 +41,29 @@ source: |
     )
   )
   
-  // at least one suspicious signal in links or sender
-  and 1 of (
+  // freemail sender — airlines and hotels do not send pkpass from Gmail etc.
+  and sender.email.domain.domain in $free_email_providers
   
+  // at least one suspicious signal in links or sender
+  and (
     // link resolves to or redirects through a suspicious TLD
     any(body.links,
         .href_url.domain.tld in $suspicious_tlds
         or any(ml.link_analysis(., mode="aggressive").redirect_history,
                .domain.tld in $suspicious_tlds
         )
-    ),
+    )
   
     // link goes to a recently registered domain
-    any(body.links, network.whois(.href_url.domain).days_old < 30),
+    or any(body.links, network.whois(.href_url.domain).days_old < 30)
   
     // sender domain does not match display name — lookalike indicator
-    (
+    or (
       length(headers.reply_to) > 0
       and all(headers.reply_to,
               .email.domain.root_domain != sender.email.domain.root_domain
       )
-    ),
-  
-    // freemail sender — airlines and hotels do not send pkpass from Gmail etc.
-    sender.email.domain.domain in $free_email_providers
+    )
   )
   
   // negate highly trusted sender domains unless they fail DMARC
