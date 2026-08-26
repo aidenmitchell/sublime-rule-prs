@@ -29,17 +29,34 @@ source: |
         strings.icontains(body.current_thread.text, "paste")
         or strings.icontains(body.current_thread.text, "pasting")
       )
-      and regex.icontains(body.current_thread.text,
-                          '(?:terminal|powershell|command prompt|run dialog|win(?:dows)?\s*\+\s*r|\bcmd\b|mshta)'
+      and strings.icontains(body.current_thread.text,
+                            "terminal",
+                            "powershell",
+                            "command prompt",
+                            "run dialog",
+                            "win+r",
+                            "windows+r",
+                            "cmd",
+                            "mshta"
       )
     )
     or (
       // keystroke-only variant — no copy/paste language, just key instructions
-      regex.icontains(body.current_thread.text,
-                      '(?:ctrl\s*[+-]\s*v|press win(?:dows)?\s*\+\s*r)'
+      strings.icontains(body.current_thread.text,
+                        "ctrl+v",
+                        "ctrl-v",
+                        "press windows+r",
+                        "press win+r"
       )
-      and regex.icontains(body.current_thread.text,
-                          '(?:terminal|powershell|command prompt|run dialog|win(?:dows)?\s*\+r|\bcmd\b|mshta)'
+      and strings.icontains(body.current_thread.text,
+                            "terminal",
+                            "powershell",
+                            "command prompt",
+                            "run dialog",
+                            "win+r",
+                            "windows+r",
+                            "cmd",
+                            "mshta"
       )
     )
   )
@@ -48,8 +65,14 @@ source: |
   and 1 of (
   
     // fake CAPTCHA or browser verification framing
-    regex.icontains(body.current_thread.text,
-                    '(?:captcha|verify you are human|human verification|browser check|press windows|press win\s*\+\s*r|i am not a robot)'
+    strings.icontains(body.current_thread.text,
+                      "captcha",
+                      "verify you are human",
+                      "human verification",
+                      "browser check",
+                      "press windows",
+                      "press win+r",
+                      "i am not a robot"
     ),
   
     // link resolves to or redirects through a suspicious TLD
@@ -66,11 +89,7 @@ source: |
   
   // negate highly trusted sender domains unless they fail DMARC
   and not (
-    (
-      sender.email.domain.root_domain in $high_trust_sender_root_domains
-      // and org_domains
-      or sender.email.domain.domain in $org_domains
-    )
+    sender.email.domain.root_domain in $high_trust_sender_root_domains
     and coalesce(headers.auth_summary.dmarc.pass, false)
   )
 tags:
