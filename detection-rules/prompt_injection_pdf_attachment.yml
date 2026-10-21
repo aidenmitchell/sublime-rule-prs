@@ -1,7 +1,7 @@
 name: "Prompt injection: Instructions to an AI in a PDF attachment"
 description: "Detects PDF attachments whose text layer or embedded text files address an AI (an assistant, a named model, 'the user', 'previous instructions') where NLU finds a request and the prompt injection model agrees. Instructions in document metadata, which no reader sees, need only the addressee and the request. Restricted to senders with low prevalence and no benign history, and excludes graymail from senders passing DMARC."
 type: "rule"
-severity: "high"
+severity: "low"
 source: |
   type.inbound
   //
@@ -60,6 +60,10 @@ source: |
                    and headers.auth_summary.dmarc.pass,
                    false
   )
+tags:
+  - "Attack surface reduction"
+  - "Email prompt injection"
+  - pr_author_IndiaAce
 attack_types:
   - "BEC/Fraud"
 tactics_and_techniques:
@@ -72,5 +76,3 @@ detection_methods:
   - "Natural Language Understanding"
   - "Sender analysis"
 id: "feea7a55-338a-55d2-b35e-afa6f44b1a38"
-tags:
-  - pr_author_IndiaAce

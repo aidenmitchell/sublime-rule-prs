@@ -1,7 +1,7 @@
 name: "Prompt injection: Body instructions addressed to an AI"
 description: "Detects message bodies that speak to an AI assistant rather than about one, such as a vocative ('Mail agent:'), a note to the model, 'if you are an AI', or a forged chat-template turn, where NLU finds a request and the prompt injection model agrees on the same text. Targets instructions aimed at AI assistants that read mail on the recipient's behalf. Restricted to senders with low prevalence and no benign history, and excludes graymail from senders passing DMARC."
 type: "rule"
-severity: "medium"
+severity: "low"
 source: |
   type.inbound
   //
@@ -43,6 +43,10 @@ source: |
                    and headers.auth_summary.dmarc.pass,
                    false
   )
+tags:
+  - "Attack surface reduction"
+  - "Email prompt injection"
+  - pr_author_IndiaAce
 attack_types:
   - "BEC/Fraud"
 tactics_and_techniques:
@@ -53,5 +57,3 @@ detection_methods:
   - "Natural Language Understanding"
   - "Sender analysis"
 id: "257a963a-8fc5-525c-9729-7b28974b8e8a"
-tags:
-  - pr_author_IndiaAce
