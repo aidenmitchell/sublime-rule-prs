@@ -1,0 +1,34 @@
+name: "Headers: Disposable reply-to domain (unsolicited)"
+description: "Detects inbound messages where the reply-to header's domain matches a known disposable or temporary domain provider and no one in our organization
+  has ever sent them an email."
+type: "rule"
+severity: "low"
+source: |
+  type.inbound
+  and any(headers.reply_to,
+          (
+            .email.domain.domain in $disposable_email_providers
+            or .email.domain.root_domain in $disposable_email_providers
+          )
+          and .email.email not in $recipient_emails
+  )
+  and sender.email.local_part not in ('no-reply', 'noreply')
+  and not (
+    sender.email.domain.root_domain in ("sfcustomeremail.com", )
+    and coalesce(headers.auth_summary.dmarc.pass, false)
+  )
+tags:
+  - "Attack surface reduction"
+  - pr_author_D-Bolton
+attack_types:
+  - "Spam"
+  - "Credential Phishing"
+  - "BEC/Fraud"
+tactics_and_techniques:
+  - "Evasion"
+  - "Free email provider"
+  - "Spoofing"
+detection_methods:
+  - "Header analysis"
+  - "Threat intelligence"
+id: "0ff44b05-6cb8-5384-85c4-b8a428d6b36c"
