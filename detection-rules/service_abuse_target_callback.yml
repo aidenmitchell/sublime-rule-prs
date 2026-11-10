@@ -26,5 +26,6 @@ detection_methods:
   - "HTML analysis"
   - "Content analysis"
   - "Sender analysis"
+id: "ac2279f8-caec-5f93-8c9c-b9a84b3e2450"
 tags:
   - pr_author_markmsublime
